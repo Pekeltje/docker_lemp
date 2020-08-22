@@ -1,21 +1,18 @@
 version: "3.8"
 services:
-    nginx:
-          container_name: nginx
+    nginx_dev:
           build: 
               context: ./nginx
               dockerfile: Dockerfile
-          ports: 
-              - "10000:80"
           volumes:
               - ./public_html:/var/www/html
               - ./configs/nginx_conf/site.conf:/etc/nginx/conf.d/default.conf
           links:
-              - php
-              - mysql
+              - php_dev
+              - mysql_dev
     
-    php:
-          container_name: php
+    php_dev:
+          container_name: php_dev
           build: 
               context: ./php
               dockerfile: Dockerfile
@@ -24,8 +21,8 @@ services:
           volumes:
               - ./public_html:/var/www/html
 
-    mysql:
-          container_name: mysql
+    mysql_dev:
+          container_name: mysql_dev
           build: 
               context: ./mysql
               dockerfile: Dockerfile
@@ -40,5 +37,15 @@ services:
             MYSQL_DATABASE: docker
             MYSQL_USER: docker
             MYSQL_PASSWORD: docker
+
+    nginx_loadbalancer:
+          container_name: nginx_loadbalancer
+          build: 
+              context: ./nginx_loadbalancer
+              dockerfile: Dockerfile
+          ports: 
+              - "10000:80"
+          volumes:
+              - ./configs/nginx_loadbalancer_conf/proxy.conf:/etc/nginx/conf.d/proxy.conf
 
 
