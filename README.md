@@ -15,6 +15,7 @@ sudo docker-compose up -d
 
 # Loadbalancer test
 docker-compose scale nginx_dev=10
+
 docker-compose scale php_dev=10
 
 # Get shell in container
