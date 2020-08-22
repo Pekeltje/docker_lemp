@@ -10,21 +10,11 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 
 
-# Not needed ???
-#newgrp docker
-
-#sudo systemctl start docker
-
-#sudo systemctl enable docker
-
-#sudo systemctl start docker.service
-
-#sudo systemctl enable docker.service
-
 # Create everything, most be in current folder
 sudo docker-compose up -d
 
-
+# Create multiple nginx containers to loadbalance
+docker-compose scale nginx_dev=10
 
 # Get shell in container
 docker exec -it CONTAINER_NAME /bin/bash
@@ -42,7 +32,7 @@ docker system prune -a -f
 # ToDo
 Remove PHP module installer script ?
 
-PHP/NGINX settings voor cachen en verwerken van meer aanvragen ?
+PHP/NGINX optimize/caching ?
 
-Loadbalancer voor NGINX/PHP/MySQL ?
+Loadbalancer PHP/MySQL ?
 
