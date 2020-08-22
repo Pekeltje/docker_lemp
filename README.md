@@ -13,8 +13,9 @@ sudo usermod -aG docker $USER
 # Create everything, most be in current folder
 sudo docker-compose up -d
 
-# Create multiple nginx containers to loadbalance
+# Loadbalancer test
 docker-compose scale nginx_dev=10
+docker-compose scale php_dev=10
 
 # Get shell in container
 docker exec -it CONTAINER_NAME /bin/bash
