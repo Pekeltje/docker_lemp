@@ -12,22 +12,16 @@ services:
               - mysql_dev
     
     php_dev:
-          container_name: php_dev
           build: 
               context: ./php
               dockerfile: Dockerfile
-          ports: 
-              - "10001:9000"
           volumes:
               - ./public_html:/var/www/html
 
     mysql_dev:
-          container_name: mysql_dev
           build: 
               context: ./mysql
               dockerfile: Dockerfile
-          ports: 
-              - "10002:3306"
           volumes:
               - ./public_html:/var/www/html
           command: --default-authentication-plugin=mysql_native_password
@@ -39,7 +33,6 @@ services:
             MYSQL_PASSWORD: docker
 
     nginx_loadbalancer:
-          container_name: nginx_loadbalancer
           build: 
               context: ./nginx_loadbalancer
               dockerfile: Dockerfile
